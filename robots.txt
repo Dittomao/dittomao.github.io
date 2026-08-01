@@ -1,4 +1,44 @@
+# Audio Mirror — crawler policy
+
+# Search crawlers: everything is public, nothing to hide.
 User-agent: *
+Allow: /
+
+# The installer is a 39 MB binary. Crawlers gain nothing by fetching it
+# and it wastes crawl budget that should go to the page itself.
+Disallow: /AudioMirror.exe
+
+# AI answer engines are named explicitly. They are already covered by the
+# wildcard above; this states the intent so a future tightening of the
+# wildcard does not silently drop them.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
 Allow: /
 
 Sitemap: https://dittomao.github.io/sitemap.xml

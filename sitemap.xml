@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Single-page site, so there is one URL. The in-page anchors (#how,
+     #pricing, #faq) are deliberately not listed: fragments are not
+     separate URLs and listing them is treated as sitemap spam. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dittomao.github.io/</loc>
-    <lastmod>2026-05-24</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 </urlset>
