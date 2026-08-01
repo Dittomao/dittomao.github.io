@@ -121,11 +121,11 @@ a{color:inherit}
   margin-right:auto;
 }
 .brand-mark{
-  width:22px;height:22px;flex:none;
-  background:var(--coral);
-  border:var(--rule) solid var(--ink);
-  border-radius:5px;
-  box-shadow:3px 3px 0 var(--ink);
+  /* The waveform logo shipped with the app and shown in the header/footer,
+     so visitors see the same mark everywhere. Rendered at 24px in the header
+     from a hi-dpi 96px source; the aspect is ~1.19, not square. */
+  width:29px;height:24px;flex:none;
+  background:url("logo.png") center/contain no-repeat;
 }
 .nav-links{display:flex;gap:26px}
 .nav-links a{
