@@ -44,8 +44,10 @@
     var val  = demo.querySelector('.sd-val');
     var sync = demo.querySelector('.sd-sync');
 
-    var MAX_MS = 400;          // matches MAX_DELAY_MS in the engine
-    var TARGET = 88;
+    // Matches the slider range quoted on the page. Keep TARGET under MAX_MS
+    // or the fill overflows its track and the demo contradicts the copy.
+    var MAX_MS = 80;
+    var TARGET = 44;
     var raf = null;
 
     function run() {
