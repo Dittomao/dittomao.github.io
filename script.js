@@ -138,7 +138,7 @@
   const stages = [
     {title: 'Pair your devices.', description: 'Connect your headphones or speakers in Windows Bluetooth & devices settings first.', statuses: ['Available in Windows', 'Available in Windows'], note: 'Example setup · pair in Windows first'},
     {title: 'Pick your listeners.', description: 'Open Audio Mirror and choose up to four additional outputs. Your default Windows output keeps playing, too.', statuses: ['Selected · ready', 'Selected · ready'], note: 'Example setup · two of four listening spots'},
-    {title: 'Press play. Settle in.', description: 'Sign in, add access, and press Start mirroring. Each listener gets a visible stream status, so you can see what is playing.', statuses: ['Playing', 'Playing'], note: 'Example setup · mirroring to two listeners'},
+    {title: 'Press play. Settle in.', description: 'Press Start mirroring. No account or internet connection needed. Each listener gets a visible stream status, so you can see what is playing.', statuses: ['Playing', 'Playing'], note: 'Example setup · mirroring to two listeners'},
     {title: 'Find your timing.', description: 'Add 0–400 ms of delay to a faster mirror target to help match a slower device. Bluetooth latency cannot be removed.', statuses: ['0 ms added delay', '45 ms added delay'], note: 'Example setup · independently adjusted delay'}
   ];
   function showStage(index) {

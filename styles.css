@@ -997,17 +997,17 @@ input[type=range]:hover::-webkit-slider-thumb,input[type=range]:active::-webkit-
   max-width:530px;
   font-size:16px
 }
-.pricing-section {
+.download-section {
   background:var(--night);
   color:var(--night-ink);
   padding:96px 0
 }
-.pricing-layout {
+.download-layout {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8%
 }
-.pricing-intro {
+.download-intro {
   font-size:19px;
   line-height:1.6;
   margin-top:26px
@@ -1030,37 +1030,37 @@ input[type=range]:hover::-webkit-slider-thumb,input[type=range]:active::-webkit-
   height:18px;
   color:var(--night-button)
 }
-.price {
+.free-label {
   font-size:clamp(76px,9vw,128px);
   line-height:1;
   letter-spacing:-.04em;
   font-weight:500;
   font-variant-numeric:tabular-nums
 }
-.price-period {
+.free-detail {
   font-size:var(--text-body);
   margin-top:14px;
   color:var(--night-secondary)
 }
-.pricing-download {
+.download-primary {
   background:var(--night-button);
   color:var(--night);
   margin-top:34px
 }
-.pricing-download:hover {
+.download-primary:hover {
   background:var(--night-ink)
 }
-.purchase-note {
+.download-detail {
   font-size:16px;
   max-width:360px;
   margin-top:22px;
   color:var(--night-secondary)
 }
-.purchase-note.small {
+.download-detail.small {
   font-size:var(--text-small);
   margin-top:14px
 }
-.pricing-section a:focus-visible {
+.download-section a:focus-visible {
   outline-color:var(--night-button)
 }
 .faq-section {
@@ -1507,13 +1507,13 @@ details[open] .faq-symbol::after {
     gap:5%;
     margin-top:32px
   }
-  .pricing-section {
+  .download-section {
     padding:76px 0
   }
-  .pricing-layout {
+  .download-layout {
     gap:5%
   }
-  .pricing-intro {
+  .download-intro {
     font-size:17px
   }
   .included {
@@ -1888,13 +1888,13 @@ details[open] .faq-symbol::after {
   .buffer-note p {
     font-size:16px
   }
-  .pricing-section {
+  .download-section {
     padding:62px 0
   }
-  .pricing-layout {
+  .download-layout {
     display:block
   }
-  .pricing-intro {
+  .download-intro {
     margin-top:22px;
     font-size:17px
   }
@@ -1903,24 +1903,24 @@ details[open] .faq-symbol::after {
     font-size:15px;
     gap:13px
   }
-  .price-figure {
+  .free-figure {
     margin-top:34px
   }
-  .price {
+  .free-label {
     font-size:96px
   }
-  .price-period {
+  .free-detail {
     font-size:17px;
     margin-top:10px
   }
-  .pricing-download {
+  .download-primary {
     margin-top:26px
   }
-  .purchase-note {
+  .download-detail {
     font-size:16px;
     max-width:340px
   }
-  .purchase-note.small {
+  .download-detail.small {
     font-size:14px
   }
   .faq-section {
@@ -2034,7 +2034,7 @@ details[open] .faq-symbol::after {
   .guide-listeners>div {
     padding-inline:5px
   }
-  .price {
+  .free-label {
     font-size:84px
   }
 }
@@ -2070,24 +2070,24 @@ details[open] .faq-symbol::after {
     margin-block:-4px
   }
 }
-.pricing-layout {
-  grid-template-areas:"intro price" "features purchase";
+.download-layout {
+  grid-template-areas:"intro price" "features download-action";
   row-gap:34px
 }
-.pricing-copy {
+.download-copy {
   grid-area:intro
 }
-.price-figure {
+.free-figure {
   grid-area:price
 }
 .included {
   grid-area:features;
   margin-top:0
 }
-.purchase {
-  grid-area:purchase
+.download-action {
+  grid-area:download-action
 }
-.pricing-download {
+.download-primary {
   margin-top:0
 }
 @keyframes reveal-copy {
@@ -2122,7 +2122,7 @@ details[open] .faq-symbol::after {
   .included {
     margin-top:28px
   }
-  .purchase {
+  .download-action {
     margin-top:32px
   }
 }

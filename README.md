@@ -8,8 +8,8 @@ independent 0–400 ms added-delay control for each one.
 [Download for Windows](https://dittomao.github.io/AudioMirror.exe)
 
 Requires Windows 10 or 11, 64-bit. Bluetooth capacity depends on the adapter,
-drivers, and devices. Mirroring requires an account and active access: USD 2.50
-adds 30 days, with no automatic renewal.
+drivers, and devices. Completely free for everyone, with every feature included.
+No account or internet connection is needed to use the app.
 
 This repository contains the static website and downloadable Windows build.
 The site includes light/dark appearance, an interactive example, a setup guide,
