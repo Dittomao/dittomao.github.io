@@ -1,533 +1,183 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="icon" type="image/png" sizes="256x256" href="/icon-256.png">
-<link rel="apple-touch-icon" href="/icon-256.png">
-
-<!-- Titled for what people actually type: "play audio on two
-     headphones at once", not for the brand name, which nobody is
-     searching for yet. -->
-<title>Audio Mirror — Play PC Audio on Two Headphones at Once</title>
-<meta name="description" content="Windows app that plays your PC audio on up to four headphones or speakers at the same time. Per-device delay sliders keep Bluetooth earbuds in sync. $2.50 a month.">
-<link rel="canonical" href="https://dittomao.github.io/">
-
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<meta name="theme-color" content="#F4F2EC">
-
-<meta property="og:site_name" content="Audio Mirror">
-<meta property="og:title" content="Audio Mirror — Play PC Audio on Two Headphones at Once">
-<meta property="og:description" content="Windows sends audio to one device. Audio Mirror sends it to four, with a per-device delay slider to get them in sync.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://dittomao.github.io/">
-<meta property="og:image" content="https://dittomao.github.io/app-shot.png">
-<meta property="og:image:width" content="1366">
-<meta property="og:image:height" content="768">
-<meta property="og:image:alt" content="The Audio Mirror window, showing two mirror rows each with a delay slider.">
-<meta property="og:locale" content="en_US">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Audio Mirror — Play PC Audio on Two Headphones at Once">
-<meta name="twitter:description" content="Windows sends audio to one device. Audio Mirror sends it to four, with a per-device delay slider to get them in sync.">
-<meta name="twitter:image" content="https://dittomao.github.io/app-shot.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-
-<!-- Google Analytics (GA4). Carried over from the previous React build of
-     this site so the property keeps collecting without a gap. -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W13R1KR6K1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-W13R1KR6K1');
-</script>
-
-<!-- The hero image is the Largest Contentful Paint element; preloading
-     it pulls the LCP forward, and Core Web Vitals is a ranking input. -->
-<link rel="preload" as="image" href="app-shot.png">
-
-<!-- Structured data. Two graphs: the product itself (price, platform,
-     features) and the FAQ. Both mirror text that is visible on the
-     page -- Google penalises structured data that claims things the
-     page does not show, and AI answer engines lift these fields
-     directly when they summarise the product. -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Audio Mirror — Share Windows Audio Across Your Headphones</title>
+  <meta name="description" content="Share your Windows audio with up to four additional headphones or speakers. Adjust each device's delay, see its status, and listen together. $2.50 for 30 days.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#F5F6F3">
+  <link rel="canonical" href="https://dittomao.github.io/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=594718c7c2d7">
+  <link rel="apple-touch-icon" href="icon-256.png?v=5b4c3affd7be">
+  <meta property="og:site_name" content="Audio Mirror">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://dittomao.github.io/">
+  <meta property="og:title" content="Audio Mirror — Your sound, together.">
+  <meta property="og:description" content="Share Windows audio across your headphones and speakers, with individual delay controls. $2.50 for 30 days. Nothing auto-renews.">
+  <meta property="og:image" content="https://dittomao.github.io/assets/app-light.webp">
+  <meta property="og:image:width" content="1120">
+  <meta property="og:image:height" content="714">
+  <meta property="og:image:alt" content="Audio Mirror's redesigned Windows app, showing an example setup with two listening devices.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Audio Mirror — Your sound, together.">
+  <meta name="twitter:description" content="Share Windows audio across your headphones. Individual delay controls. $2.50 for 30 days.">
+  <meta name="twitter:image" content="https://dittomao.github.io/assets/app-light.webp">
+  <script src="theme-init.js?v=3fa7280124bc"></script>
+  <link rel="stylesheet" href="styles.css?v=2a228575e81e">
+  <script src="script.js?v=6e89167df97d" defer></script>
+  <!-- Existing analytics property retained for the GitHub Pages site. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W13R1KR6K1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W13R1KR6K1');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [{
       "@type": "SoftwareApplication",
       "@id": "https://dittomao.github.io/#app",
       "name": "Audio Mirror",
       "url": "https://dittomao.github.io/",
-      "description": "Windows application that mirrors the PC's audio output to up to four devices at once, with an independent delay slider per device to compensate for Bluetooth latency.",
+      "description": "Share the default Windows audio output with up to four additional headphones or speakers, with independent added delay from 0 to 400 ms.",
       "applicationCategory": "MultimediaApplication",
-      "applicationSubCategory": "Audio routing",
-      "operatingSystem": "Windows 10, Windows 11 (64-bit)",
+      "operatingSystem": "Windows 10 or Windows 11, 64-bit",
       "downloadUrl": "https://dittomao.github.io/AudioMirror.exe",
-      "installUrl": "https://dittomao.github.io/#get",
-      "screenshot": "https://dittomao.github.io/app-shot.png",
-      "softwareRequirements": "Windows 10 or 11, 64-bit",
-      "fileSize": "38.8 MB",
-      "featureList": [
-        "Mirror audio to up to 4 output devices at once",
-        "Independent delay slider per device, up to 80 ms",
-        "Four buffer presets: Ultra Low, Low, Balanced, Stable",
-        "Automatic reconnection when a device drops out",
-        "Live per-device status",
-        "Mirrored volume follows the system volume"
-      ],
-      "offers": {
-        "@type": "Offer",
-        "price": "2.50",
-        "priceCurrency": "USD",
-        "category": "Subscription",
-        "description": "30 days of access. Nothing auto-renews.",
-        "availability": "https://schema.org/InStock",
-        "url": "https://dittomao.github.io/#pricing"
-      }
-    },
-    {
+      "screenshot": "https://dittomao.github.io/assets/app-light.webp",
+      "fileSize": "32222156 bytes",
+      "featureList": ["Up to four additional listening devices", "Independent 0–400 ms added delay", "Per-device stream status", "Light and dark appearance", "Four playback buffer presets"],
+      "offers": {"@type": "Offer", "price": "2.50", "priceCurrency": "USD", "description": "30 days of access. No automatic renewal.", "availability": "https://schema.org/InStock", "url": "https://dittomao.github.io/#pricing"}
+    }, {
       "@type": "FAQPage",
-      "@id": "https://dittomao.github.io/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Will the two sides be perfectly in sync?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Close enough that you stop noticing, once you've set the sliders. Bluetooth devices each add their own delay, and no software can remove delay that has already happened — so Audio Mirror lets you delay the faster device to match the slower one. That's what the per-row slider does, up to 80 ms."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does it work with any earbuds?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It works with whatever Windows lists as an output device — Bluetooth, USB, or built-in. Some devices refuse the format the app asks for; those are marked \"Unsupported\" in their row rather than failing silently."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Will it slow my PC down?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "It's a small app doing a steady, low-level job: reading one audio stream and writing it to a few others. It runs its audio threads at raised priority so playback stays smooth, which is standard for audio software."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What happens when an earbud disconnects?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "That row switches to \"Reconnecting\" and keeps trying, and you get a notification. The other outputs carry on uninterrupted. When the device comes back it rejoins on its own."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why monthly instead of a one-time purchase?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A month costs $2.50 and then stops. It is not a recurring subscription — nothing auto-renews and there is nothing to remember to cancel. When the month runs out, access simply expires, and you pay again only if you still want it."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can Windows play audio on two headphones at once without this?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Not directly. Windows sends audio to one output device at a time, and the Stereo Mix workaround only exists on some sound cards, routes a single extra device, and gives you no way to correct the delay between them. Audio Mirror handles up to four outputs and gives each one its own delay slider."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can two people watch a movie on one laptop with separate earbuds?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "That is the case this was built for. Pair both sets of Bluetooth earbuds to the laptop, add them as two outputs, and line them up with the delay sliders — one film, two people, nobody sharing a cable or leaning in."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Mac or Linux?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Not yet. Audio Mirror uses Windows' own audio loopback to tap the system output, so it's Windows-only for now."
-          }
-        }
-      ]
-    }
-  ]
-}
-</script>
+      "mainEntity": [{
+        "@type": "Question", "name": "How many headphones can I use?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Audio Mirror supports up to four additional listening devices while your default Windows output keeps playing. The number of simultaneous Bluetooth links depends on your adapter, drivers, and headphones. Start with two devices and add more if your hardware supports them."}
+      }, {
+        "@type": "Question", "name": "Will everything be perfectly in sync?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Each device has its own latency. Add 0–400 ms of delay to a faster mirror target to help it match a slower one. Software cannot remove Bluetooth latency, and precise synchronization is not guaranteed."}
+      }, {
+        "@type": "Question", "name": "Which version of Windows do I need?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Windows 10 or Windows 11, 64-bit. Audio Mirror uses Windows audio capture and WebView2 for its interface. Mac, Linux, phones, and tablets are not supported."}
+      }, {
+        "@type": "Question", "name": "How does the payment work?",
+        "acceptedAnswer": {"@type": "Answer", "text": "The download is free. Mirroring requires an account and active access. A USD 2.50 payment through PayPal inside the app adds 30 days. Nothing automatically renews."}
+      }]
+    }]
+  }
+  </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+<svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+  <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 14v-3a8 8 0 0 1 16 0v3M4 12H3v7h4v-7H4Zm16 0h1v7h-4v-7h3Z"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><path d="M4 16V5h16v11M2 19h20l-2-3H4l-2 3Z"/></symbol>
+  <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><circle cx="12" cy="14" r="3"/><path d="M12 7h.01"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v2m0 18v2M1 12h2m18 0h2M4 4l1 1m14 14 1 1M4 20l1-1M19 5l1-1"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</defs></svg>
 
-<a class="skip" href="#main">Skip to content</a>
-
-<header class="nav">
-  <div class="wrap nav-in">
-    <a class="brand" href="#top">
-      <span class="brand-mark" aria-hidden="true"></span>
-      Audio&nbsp;Mirror
-    </a>
-    <nav class="nav-links">
-      <a href="#how">How it works</a>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <a class="btn btn-sm" href="#get">Get it</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#" aria-label="Audio Mirror home"><span class="brand-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>audio mirror</span></a>
+    <nav class="desktop-nav" aria-label="Main navigation"><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">Questions</a></nav>
+    <div class="header-actions">
+      <button type="button" class="icon-button theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Switch to dark mode" hidden><svg class="icon moon"><use href="#i-moon"/></svg><svg class="icon sun"><use href="#i-sun"/></svg></button>
+      <a class="button header-download" href="AudioMirror.exe" download><span>Download</span><svg class="icon"><use href="#i-download"/></svg></a>
+      <button class="icon-button menu-toggle" type="button" aria-label="Open navigation" aria-controls="mobile-nav" aria-expanded="false" hidden><svg class="icon"><use href="#i-menu"/></svg></button>
+    </div>
   </div>
+  <nav id="mobile-nav" class="mobile-nav container" aria-label="Mobile navigation" hidden><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">Questions</a></nav>
 </header>
 
-<main id="main">
-
-<!-- ── Hero ─────────────────────────────────────────────── -->
-<section class="hero" id="top">
-  <div class="wrap hero-in">
+<main id="main" tabindex="-1">
+  <section class="hero container" aria-labelledby="hero-heading">
     <div class="hero-copy">
-      <p class="eyebrow">Windows&nbsp;10 &amp; 11</p>
-      <h1>Play one sound on <em>two</em> pairs of headphones.</h1>
-      <p class="lede">
-        Windows sends audio to a single output device. Audio Mirror sends it to
-        four — your laptop speakers and up to three Bluetooth headphones or
-        earbuds, at the same time, from the same movie.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-lg" href="#get">Download for Windows</a>
-        <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
+      <h1 id="hero-heading" data-reveal>Your sound,<br>together.</h1>
+      <p class="hero-description" data-reveal>One PC. Your favourite headphones. Share Windows audio across the devices you choose.</p>
+      <div class="hero-actions" data-reveal><a class="button primary" href="AudioMirror.exe" download><svg class="icon"><use href="#i-download"/></svg>Download for Windows</a><a class="text-link" href="#preview">Try the controls<svg class="icon"><use href="#i-arrow"/></svg></a></div>
+      <p class="download-note" data-reveal>Windows 10 / 11 · 64-bit · 32.2 MB<br><a href="#pricing">$2.50 for 30 days.</a> Nothing auto-renews.</p>
+    </div>
+    <div class="hero-stage" id="preview">
+      <div class="demo" data-ui aria-labelledby="demo-heading">
+        <div class="demo-top"><h2 id="demo-heading">Audio setup</h2><span>Interactive preview</span></div>
+        <div class="demo-source"><svg class="icon"><use href="#i-laptop"/></svg><div><span class="demo-source-kind">Windows output</span><strong>Speakers (Realtek Audio)</strong></div><span class="source-dot" aria-hidden="true"></span></div>
+        <div class="demo-list-heading"><span>Listening on</span><span id="demo-count">2 of 4</span></div>
+        <div class="demo-list" id="demo-list">
+          <div class="demo-device" data-device="0"><div class="device-top"><svg class="icon"><use href="#i-headphones"/></svg><strong>AirPods Pro</strong><button class="icon-button remove-device" type="button" aria-label="Remove AirPods Pro from preview" data-remove="0" disabled><svg class="icon"><use href="#i-close"/></svg></button></div><span class="device-status">Ready to listen</span><div class="delay-control"><label for="delay-0">Delay</label><input id="delay-0" type="range" min="0" max="400" step="1" value="0" data-delay="0" aria-describedby="delay-help" disabled><output id="delay-value-0" for="delay-0">0 ms</output></div></div>
+          <div class="demo-device" data-device="1"><div class="device-top"><svg class="icon"><use href="#i-headphones"/></svg><strong>Sony WH-1000XM5</strong><button class="icon-button remove-device" type="button" aria-label="Remove Sony WH-1000XM5 from preview" data-remove="1" disabled><svg class="icon"><use href="#i-close"/></svg></button></div><span class="device-status">Ready to listen</span><div class="delay-control"><label for="delay-1">Delay</label><input id="delay-1" type="range" min="0" max="400" step="1" value="45" data-delay="1" aria-describedby="delay-help" disabled><output id="delay-value-1" for="delay-1">45 ms</output></div></div>
+        </div>
+        <button class="demo-add" id="demo-add" type="button" disabled><svg class="icon"><use href="#i-plus"/></svg><span>Add a listening device</span><span id="demo-slots">2 spots left</span></button>
+        <div class="demo-playback"><span id="demo-playback-copy">Ready when you are.</span><button type="button" id="demo-play" class="button primary" aria-pressed="false" disabled><span class="play-symbol" aria-hidden="true"></span><span id="demo-play-label">Start preview</span></button></div>
+        <p id="delay-help" class="demo-hint">Try adding delay to the faster device.</p>
       </div>
-      <p class="microcopy">$2.50 per month · No account needed to try the download</p>
+      <p class="preview-caption">Example devices. No audio is captured or played.</p>
+      <noscript><p class="preview-caption">Enable JavaScript to try the preview. The Windows app works separately.</p></noscript>
     </div>
+    <div class="hero-foot" data-reveal><p>For movie nights, shared playlists,<br>and a little more company.</p><a href="#listeners" class="text-link">Meet your new setup<svg class="icon"><use href="#i-arrow"/></svg></a></div>
+    <p id="preview-announcement" class="sr-only" role="status" aria-live="polite"></p>
+  </section>
 
-    <figure class="hero-shot">
-      <img src="app-shot.png" width="1366" height="768"
-           alt="Audio Mirror running on a laptop: a source device at the top, two mirror targets each with a delay slider, and a Start Mirroring button.">
-    </figure>
-  </div>
+  <section id="listeners" class="listeners-section container" aria-labelledby="listeners-heading">
+    <h2 class="section-heading" id="listeners-heading" data-reveal>Every listener, in view.</h2>
+    <div class="state-row"><div class="state-copy" data-reveal><h3>Ready.</h3><p>Choose a device Windows can see. Give every listener their own spot.</p></div><figure class="state-picture" data-reveal><img class="app-light" src="assets/listener-ready.webp" width="515" height="108" loading="lazy" alt="An example AirPods Pro listener row, ready to listen with zero added delay."><img class="app-dark" src="assets/listener-ready-dark.webp" width="515" height="108" loading="lazy" alt="The same example listener in dark mode, showing ready."></figure></div>
+    <div class="state-row"><div class="state-copy" data-reveal><h3>Playing.</h3><p>See each stream’s status at a glance. Fine-tune its delay while you listen.</p></div><figure class="state-picture" data-reveal><img class="app-light" src="assets/listener-playing.webp" width="515" height="108" loading="lazy" alt="The same example listener row showing Playing, with its delay control available."><img class="app-dark" src="assets/listener-playing-dark.webp" width="515" height="108" loading="lazy" alt="The same example listener in dark mode, showing playing."></figure></div>
+    <div class="state-row"><div class="state-copy" data-reveal><h3>Reconnecting.</h3><p>A device drops out? Its spot stays selected while the app waits for Windows to make it available.</p></div><figure class="state-picture" data-reveal><img class="app-light" src="assets/listener-reconnecting.webp" width="515" height="108" loading="lazy" alt="The example listener row showing Reconnecting after its device becomes unavailable."><img class="app-dark" src="assets/listener-reconnecting-dark.webp" width="515" height="108" loading="lazy" alt="The same example listener in dark mode, showing reconnecting."></figure></div>
+    <p class="section-note" data-reveal>Example app states. Bluetooth connection capacity depends on your hardware.</p>
+  </section>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Two pairs of earbuds</span><b>◆</b>
-      <span>One movie</span><b>◆</b>
-      <span>Laptop speakers + AirPods</span><b>◆</b>
-      <span>Per-device delay</span><b>◆</b>
-      <span>Up to 4 outputs</span><b>◆</b>
-      <span>Two pairs of earbuds</span><b>◆</b>
-      <span>One movie</span><b>◆</b>
-      <span>Laptop speakers + AirPods</span><b>◆</b>
-      <span>Per-device delay</span><b>◆</b>
-      <span>Up to 4 outputs</span><b>◆</b>
-    </div>
-  </div>
-</section>
-
-<!-- ── The problem ──────────────────────────────────────── -->
-<section class="problem">
-  <div class="wrap">
-    <div class="prob-grid">
-      <div class="prob-card prob-bad">
-        <span class="tag tag-bad">Without it</span>
-        <h3>One device gets the sound.</h3>
-        <p>
-          You pick a pair of earbuds in the Windows sound menu and that is that.
-          The other person leans in, or you split a cable, or somebody watches
-          the film on mute.
-        </p>
+  <section id="how" class="how-section" aria-labelledby="how-heading">
+    <div class="container">
+      <div class="guide-layout">
+        <div class="guide-copy"><h2 class="section-heading" id="how-heading" data-reveal>A little setup.<br>A lot of company.</h2><div class="guide-current" aria-live="polite"><h3 id="guide-title">Pair your devices.</h3><p id="guide-description">Connect your headphones or speakers in Windows Bluetooth &amp; devices settings first.</p></div><p class="guide-hardware" data-reveal>Start with two devices. Add more as your Bluetooth adapter allows, or mix in wired and USB outputs.</p></div>
+        <div class="guide-visual" data-reveal>
+          <div class="guide-fragment" data-ui><div class="guide-fragment-top"><span class="brand-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>One source, your listeners.</span></div><div class="guide-source"><svg class="icon"><use href="#i-laptop"/></svg><span>Windows output</span></div><div class="guide-wire" aria-hidden="true"><svg viewBox="0 0 200 58" preserveAspectRatio="none"><path d="M100 0V42M50 58V42H150V58"/><rect class="guide-signal" x="98" y="0" width="4" height="10" rx="2"/></svg></div><div class="guide-listeners"><div><svg class="icon"><use href="#i-headphones"/></svg><strong>AirPods Pro</strong><span class="guide-device-status">Available in Windows</span></div><div><svg class="icon"><use href="#i-headphones"/></svg><strong>Sony WH-1000XM5</strong><span class="guide-device-status">Available in Windows</span></div></div><p id="guide-preview-note">Example setup · pair in Windows first</p></div>
+        </div>
       </div>
-      <div class="prob-card prob-good">
-        <span class="tag tag-good">With it</span>
-        <h3>Four devices get the sound.</h3>
-        <p>
-          Audio Mirror taps whatever Windows is already playing and copies that
-          stream to every output you add — no cables, no re-pairing, nothing to
-          configure in Windows.
-        </p>
-      </div>
+      <div class="guide-navigation" data-reveal><label class="sr-only" for="guide-progress">Explore the four setup stages</label><input id="guide-progress" type="range" min="0" max="3" step="1" value="0" aria-valuetext="Pair your devices" disabled><div class="guide-stages"><button type="button" data-step="0" aria-current="step" disabled>Pair in Windows</button><button type="button" data-step="1" disabled>Pick your listeners</button><button type="button" data-step="2" disabled>Start mirroring</button><button type="button" data-step="3" disabled>Adjust the delay</button></div></div>
+      <noscript><ol class="guide-fallback"><li>Pair your devices in Windows.</li><li>Open Audio Mirror and choose up to four additional listening devices.</li><li>Sign in, add access, and press Start mirroring.</li><li>Add 0–400 ms of delay to faster mirror targets to help match the slower devices.</li></ol></noscript>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── How it works ─────────────────────────────────────── -->
-<section class="how" id="how">
-  <div class="wrap">
-    <header class="sec-head">
-      <h2>Three steps, about a minute</h2>
-      <p>Then the film starts and nobody touches it again.</p>
-    </header>
+  <section class="appearance-section container" aria-labelledby="appearance-heading">
+    <div class="appearance-intro"><h2 id="appearance-heading" class="section-heading" data-reveal>Easy on the eyes.<br>Yours to settle into.</h2><div class="appearance-copy"><p data-reveal>A quieter space for your sound. The same thoughtful controls, in light or dark.</p><div class="appearance-choices" role="group" aria-label="Try the site and app preview appearance" data-reveal><button class="appearance-choice" data-theme-choice="light" type="button" aria-pressed="true" disabled><svg class="icon"><use href="#i-sun"/></svg>Light</button><button class="appearance-choice" data-theme-choice="dark" type="button" aria-pressed="false" disabled><svg class="icon"><use href="#i-moon"/></svg>Dark</button></div></div></div>
+    <figure class="app-figure" data-reveal><div class="app-image-stage"><img class="app-light" src="assets/app-light.webp" width="1120" height="714" loading="lazy" alt="Audio Mirror in light mode, with one Windows source, two example listeners, and individual delay sliders."><img class="app-dark" src="assets/app-dark.webp" width="1120" height="714" loading="lazy" alt="The same Audio Mirror example setup in dark mode."></div><figcaption>The redesigned Windows app. Example devices shown.</figcaption></figure>
+    <div class="buffer-note" data-reveal><h3>A little breathing room.</h3><p>Using several Bluetooth devices? The app starts with the Stable buffer to give playback more room to keep up. Change it in Preferences whenever you need.</p></div>
+  </section>
 
-    <ol class="steps">
-      <li class="step">
-        <div class="step-num">01</div>
-        <div class="step-body">
-          <h3>It finds your source</h3>
-          <p>
-            Audio Mirror reads whatever your PC is currently playing through
-            its default output. Nothing to select — the source strip at the top
-            of the window shows what it picked up.
-          </p>
-        </div>
-        <div class="step-art">
-          <img src="earbuds-violet.png" alt="" width="600" height="600" loading="lazy">
-        </div>
-      </li>
-
-      <li class="step step-flip">
-        <div class="step-num">02</div>
-        <div class="step-body">
-          <h3>You add the outputs</h3>
-          <p>
-            Pick up to four devices from the dropdowns — Bluetooth earbuds,
-            USB headsets, your laptop speakers, any mix. Each one gets its own
-            row and its own status.
-          </p>
-        </div>
-        <div class="step-art">
-          <img src="earbuds-amber.png" alt="" width="600" height="600" loading="lazy">
-        </div>
-      </li>
-
-      <li class="step">
-        <div class="step-num">03</div>
-        <div class="step-body">
-          <h3>You slide until they match</h3>
-          <p>
-            Bluetooth devices don't all arrive at the same moment. Each row has
-            a delay slider up to 80&nbsp;ms — nudge the early one until both
-            sides sound like one. It adjusts live, while the audio plays.
-          </p>
-        </div>
-        <div class="step-art step-art-slider">
-          <div class="slider-demo" aria-hidden="true">
-            <div class="sd-row"><span class="sd-label">Delay</span><div class="sd-track"><div class="sd-fill" style="--w:55%"></div><div class="sd-knob" style="--x:55%"></div></div><span class="sd-val">44 ms</span></div>
-            <div class="sd-row"><span class="sd-label">Delay</span><div class="sd-track"><div class="sd-fill" style="--w:0%"></div><div class="sd-knob" style="--x:0%"></div></div><span class="sd-val">0 ms</span></div>
-            <div class="sd-sync">◆ BOTH SYNCED</div>
-          </div>
-        </div>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<!-- ── Features ─────────────────────────────────────────── -->
-<section class="features" id="features">
-  <div class="wrap">
-    <header class="sec-head">
-      <h2>What's in the box</h2>
-      <p>Every claim here is something the app actually does.</p>
-    </header>
-
-    <div class="feat-grid">
-      <article class="feat feat-yellow">
-        <div class="feat-num">4</div>
-        <h3>Up to four outputs</h3>
-        <p>Mirror to four devices at once. Add and remove them while audio is playing.</p>
-      </article>
-
-      <article class="feat feat-cyan">
-        <div class="feat-num">80<small>ms</small></div>
-        <h3>Per-device delay</h3>
-        <p>An independent slider per output, adjustable live, so slow Bluetooth can be lined up with fast speakers.</p>
-      </article>
-
-      <article class="feat feat-coral">
-        <div class="feat-num">4</div>
-        <h3>Buffer presets</h3>
-        <p>Ultra&nbsp;Low, Low, Balanced and Stable. Trade a little latency for stability when a device stutters.</p>
-      </article>
-
-      <article class="feat feat-slate">
-        <div class="feat-icon" aria-hidden="true">↻</div>
-        <h3>It reconnects itself</h3>
-        <p>When an earbud wanders out of range and comes back, that output picks up again on its own. The rest never stop.</p>
-      </article>
-
-      <article class="feat feat-green">
-        <div class="feat-icon" aria-hidden="true">◆</div>
-        <h3>Live status per device</h3>
-        <p>Every row says what it's doing — connecting, synced, reconnecting, or unsupported. No guessing which earbud dropped.</p>
-      </article>
-
-      <article class="feat feat-violet">
-        <div class="feat-icon" aria-hidden="true">♪</div>
-        <h3>Volume follows the source</h3>
-        <p>Change your system volume and the mirrored devices track it, so one volume key controls the room.</p>
-      </article>
+  <section id="pricing" class="pricing-section" aria-labelledby="pricing-heading">
+    <div class="container pricing-layout">
+      <div class="pricing-copy"><h2 id="pricing-heading" class="section-heading" data-reveal>Time well shared.</h2><p class="pricing-intro" data-reveal>Add 30 days when you need them.<br>Nothing automatically renews.</p></div>
+      <div class="price-figure"><p class="price" data-reveal>$2.50</p><p class="price-period" data-reveal>USD / 30 days</p></div>
+      <ul class="included" data-reveal><li><svg class="icon"><use href="#i-check"/></svg>Up to four additional listeners</li><li><svg class="icon"><use href="#i-check"/></svg>Individual 0–400 ms delay controls</li><li><svg class="icon"><use href="#i-check"/></svg>Light and dark appearance</li><li><svg class="icon"><use href="#i-check"/></svg>Bluetooth, wired, and USB outputs</li></ul>
+      <div class="purchase"><a class="button pricing-download" href="AudioMirror.exe" download data-reveal><svg class="icon"><use href="#i-download"/></svg>Download for Windows</a><p class="purchase-note" data-reveal>Download the app, create an account, then add access with PayPal inside the app.</p><p class="purchase-note small" data-reveal>The download is free. Mirroring requires active access.</p></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── Screenshot ───────────────────────────────────────── -->
-<section class="shot">
-  <div class="wrap">
-    <div class="shot-frame">
-      <img src="app-shot.png" width="1366" height="768" loading="lazy"
-           alt="The Audio Mirror window: the source device, two mirror rows each with a device dropdown and delay slider, a buffer control, and a red Start Mirroring button.">
-    </div>
-    <p class="shot-cap">The whole app. One window, no settings screen buried three menus deep.</p>
-  </div>
-</section>
-
-<!-- ── Pricing ──────────────────────────────────────────── -->
-<section class="pricing" id="pricing">
-  <div class="wrap">
-    <header class="sec-head">
-      <h2>Pricing</h2>
-      <p>One plan. Pay for the month you need it.</p>
-    </header>
-
-    <div class="price-card" id="get">
-      <div class="price-head">
-        <span class="tag tag-good">Monthly pass</span>
-        <div class="price-amt"><span class="cur">$</span>2.50<span class="per">/ month</span></div>
-        <p class="price-sub">Full access for 30 days. Pay again only if you want more time.</p>
-      </div>
-
-      <ul class="price-list">
-        <li>Mirror to up to 4 devices at once</li>
-        <li>Per-device delay sliders</li>
-        <li>All four buffer presets</li>
-        <li>Automatic reconnection</li>
-        <li>Redeem codes supported</li>
-      </ul>
-
-      <a class="btn btn-lg btn-block" href="AudioMirror.exe" download>
-        Download for Windows
-      </a>
-      <p class="price-foot">
-        38.8&nbsp;MB · Windows 10 &amp; 11, 64-bit · Checkout by PayPal inside the app
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ── FAQ ──────────────────────────────────────────────── -->
-<section class="faq" id="faq">
-  <div class="wrap">
-    <header class="sec-head">
-      <h2>Questions</h2>
-    </header>
-
+  <section id="faq" class="faq-section container" aria-labelledby="faq-heading">
+    <div class="faq-intro"><h2 id="faq-heading" class="section-heading" data-reveal>A few good<br>questions.</h2><p data-reveal>A little clarity before<br>you press play.</p></div>
     <div class="faq-list">
-      <details>
-        <summary>Will the two sides be perfectly in sync?</summary>
-        <p>
-          Close enough that you stop noticing, once you've set the sliders.
-          Bluetooth devices each add their own delay, and no software can remove
-          delay that has already happened — so Audio Mirror lets you delay the
-          <em>faster</em> device to match the slower one. That's what the
-          per-row slider does, up to 80&nbsp;ms.
-        </p>
-      </details>
-
-      <details>
-        <summary>Does it work with any earbuds?</summary>
-        <p>
-          It works with whatever Windows lists as an output device — Bluetooth,
-          USB, or built-in. Some devices refuse the format the app asks for; those
-          are marked "Unsupported" in their row rather than failing silently.
-        </p>
-      </details>
-
-      <details>
-        <summary>Will it slow my PC down?</summary>
-        <p>
-          It's a small app doing a steady, low-level job: reading one audio
-          stream and writing it to a few others. It runs its audio threads at
-          raised priority so playback stays smooth, which is standard for
-          audio software.
-        </p>
-      </details>
-
-      <details>
-        <summary>What happens when an earbud disconnects?</summary>
-        <p>
-          That row switches to "Reconnecting" and keeps trying, and you get a
-          notification. The other outputs carry on uninterrupted. When the
-          device comes back it rejoins on its own.
-        </p>
-      </details>
-
-      <details>
-        <summary>Why monthly instead of a one-time purchase?</summary>
-        <p>
-          A month costs $2.50 and then stops. It is not a recurring
-          subscription — nothing auto-renews and there is nothing to remember
-          to cancel. When the month runs out, access simply expires, and you
-          pay again only if you still want it.
-        </p>
-      </details>
-
-      <details>
-        <summary>Can Windows play audio on two headphones at once without this?</summary>
-        <p>
-          Not directly. Windows sends audio to one output device at a time, and
-          the Stereo Mix workaround only exists on some sound cards, routes a
-          single extra device, and gives you no way to correct the delay
-          between them. Audio Mirror handles up to four outputs and gives each
-          one its own delay slider.
-        </p>
-      </details>
-
-      <details>
-        <summary>Can two people watch a movie on one laptop with separate earbuds?</summary>
-        <p>
-          That is the case this was built for. Pair both sets of Bluetooth
-          earbuds to the laptop, add them as two outputs, and line them up with
-          the delay sliders — one film, two people, nobody sharing a cable or
-          leaning in.
-        </p>
-      </details>
-
-      <details>
-        <summary>Mac or Linux?</summary>
-        <p>
-          Not yet. Audio Mirror uses Windows' own audio loopback to tap the
-          system output, so it's Windows-only for now.
-        </p>
-      </details>
+      <details name="questions" data-reveal><summary>How many headphones can I use?<span class="faq-symbol" aria-hidden="true"></span></summary><div class="faq-answer"><p>Audio Mirror supports up to four additional listening devices while your default Windows output keeps playing.</p><p>The number of simultaneous Bluetooth links depends on your adapter, drivers, and headphones. Start with two devices and add more if your hardware supports them.</p></div></details>
+      <details name="questions" data-reveal><summary>Can I mix Bluetooth and wired devices?<span class="faq-symbol" aria-hidden="true"></span></summary><div class="faq-answer"><p>Yes. Choose the Bluetooth, wired, or USB outputs that appear in Windows. You can mix them in the same setup. Your default Windows output is the source and keeps playing directly.</p></div></details>
+      <details name="questions" data-reveal><summary>Will everything be perfectly in sync?<span class="faq-symbol" aria-hidden="true"></span></summary><div class="faq-answer"><p>Each device has its own latency. Add 0–400 ms of delay to a faster mirror target to help it match a slower one.</p><p>Software cannot remove Bluetooth latency, and precise synchronization is not guaranteed. The controls adjust added delay; they cannot make a slow device play sooner.</p></div></details>
+      <details name="questions" data-reveal><summary>What if a device disconnects?<span class="faq-symbol" aria-hidden="true"></span></summary><div class="faq-answer"><p>The app shows a reconnecting state and keeps that device selected. It can retry once Windows exposes the audio output again. A change in available devices can briefly restart the audio streams.</p><p>If the headphones disconnect in Windows itself, reconnect them there first. Software cannot restore a Bluetooth radio link that Windows has lost.</p></div></details>
+      <details name="questions" data-reveal><summary>Which version of Windows do I need?<span class="faq-symbol" aria-hidden="true"></span></summary><div class="faq-answer"><p>Windows 10 or Windows 11, 64-bit. Audio Mirror uses Windows audio capture and WebView2 for its interface. Mac, Linux, phones, and tablets are not supported.</p></div></details>
+      <details name="questions" data-reveal><summary>How does the payment work?<span class="faq-symbol" aria-hidden="true"></span></summary><div class="faq-answer"><p>The download is free. Mirroring requires an account and active access. A USD 2.50 payment through PayPal inside the app adds 30 days. Nothing automatically renews.</p></div></details>
+      <details name="questions" data-reveal><summary>Does my audio leave my computer?<span class="faq-symbol" aria-hidden="true"></span></summary><div class="faq-answer"><p>Audio routing happens locally on your PC. Internet access is used for account sign-in, access checks, and payments.</p></div></details>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── Final CTA ────────────────────────────────────────── -->
-<section class="final">
-  <div class="wrap final-in">
-    <h2>Two pairs of earbuds. One film.</h2>
-    <p>Download it, set two sliders, press start.</p>
-    <a class="btn btn-lg btn-invert" href="AudioMirror.exe" download>Download for Windows</a>
-  </div>
-</section>
-
+  <section class="closing-section container" aria-labelledby="closing-heading"><h2 class="section-heading" id="closing-heading" data-reveal>Good sound.<br>Better company.</h2><div data-reveal><a class="button primary" href="AudioMirror.exe" download><svg class="icon"><use href="#i-download"/></svg>Download for Windows</a><p>Make room for another listener.</p></div></section>
 </main>
-
-<footer class="foot">
-  <div class="wrap foot-in">
-    <div class="foot-brand">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <strong>Audio Mirror</strong>
-      <p>Mirror your PC audio to up to four devices at once.</p>
-    </div>
-    <nav class="foot-links">
-      <a href="#how">How it works</a>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-  </div>
-  <div class="wrap foot-bottom">
-    <span>© 2026 Audio Mirror</span>
-    <span>Windows 10 &amp; 11, 64-bit</span>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+<footer class="site-footer container"><a class="brand" href="#" aria-label="Audio Mirror home"><span class="brand-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>audio mirror</span></a><p>Made for listening together.</p><a class="text-link" href="#main">Back to top<svg class="icon"><use href="#i-arrow"/></svg></a></footer>
 </body>
 </html>

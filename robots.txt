@@ -4,7 +4,7 @@
 User-agent: *
 Allow: /
 
-# The installer is a 39 MB binary. Crawlers gain nothing by fetching it
+# The application is a 32.2 MB binary. Crawlers gain nothing by fetching it
 # and it wastes crawl budget that should go to the page itself.
 Disallow: /AudioMirror.exe
 
